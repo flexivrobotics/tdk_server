@@ -16,9 +16,10 @@ It enables secure, low-latency, and reliable communication between user edge dev
 
 ```bash
 # 1) Clone repo
-git clone git@github.com:flexivrobotics/tdk_server.git
+git clone https://github.com/flexivrobotics/tdk_server.git
 
 # 2) Generate CA + server cert + leader/follower client packages
+cd tdk_server
 bash scripts/generate_server_client_cert.sh --ip SERVER_PUBLIC_IP
 
 # 3) Install TDK Server package + systemd service
@@ -41,7 +42,7 @@ and no extra firewall rule is required.
 # On your LOCAL computer:
 mkdir -p ~/tdk-certs && cd ~/tdk-certs
 
-# Replace key path / user / host to match your SSH login.
+# Replace key path / SERVER_NAME / SERVER_PUBLIC_IP to match your SSH login.
 scp -i /path/to/key.pem SERVER_NAME@SERVER_PUBLIC_IP:/path/to/remote/generated/packages/leader.tar.gz .
 scp -i /path/to/key.pem SERVER_NAME@SERVER_PUBLIC_IP:/path/to/remote/generated/packages/follower.tar.gz .
 
