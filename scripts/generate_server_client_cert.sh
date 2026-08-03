@@ -41,7 +41,7 @@ while [[ $# -gt 0 ]]; do
 done
 
 if [[ -z "${SERVER_IP}" ]]; then
-    echo "ERROR: --ip <public-ip> is required" >&2
+    echo "ERROR: --ip <public-server-ipv4-address> is required" >&2
     exit 1
 fi
 if [[ ! -f "${TEMPLATE}" ]]; then
