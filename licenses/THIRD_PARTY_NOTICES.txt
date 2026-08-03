@@ -1,0 +1,21 @@
+Third-Party Notices for Flexiv TDK Server
+========================================
+
+This product redistributes unmodified binary components built from the
+upstream open-source project Eclipse zenoh, git tag 1.9.0:
+
+  Upstream source: https://github.com/eclipse-zenoh/zenoh
+  Tag / version:   1.9.0
+  License:         EPL-2.0 OR Apache-2.0
+                   (SPDX-License-Identifier: EPL-2.0 OR Apache-2.0)
+
+License texts included in this directory:
+
+  LICENSE.txt              Combined upstream LICENSE from Eclipse zenoh 1.9.0
+  LICENSE-Apache-2.0.txt   Apache License, Version 2.0
+  LICENSE-EPL-2.0.txt      Eclipse Public License 2.0
+  NOTICE.md                Upstream Eclipse zenoh NOTICE (trademarks / copyright)
+
+Flexiv TDK Server is a product packaging and deployment layer around
+this component. Eclipse zenoh, Eclipse, and the Eclipse Logo are trademarks
+of the Eclipse Foundation. This product is not an Eclipse Foundation product.
