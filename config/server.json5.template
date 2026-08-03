@@ -1,0 +1,41 @@
+{
+  mode: "router",
+  connect: {
+    endpoints: [],
+  },
+  listen: {
+    endpoints: [
+      "quic/0.0.0.0:7449"
+    ],
+  },
+  scouting: {
+    multicast: { enabled: false },
+    gossip: { enabled: true, multihop: true },
+  },
+  transport: {
+    unicast: {
+      qos: { enabled: true },
+      compression: { enabled: false },
+    },
+    link: {
+      tls: {
+        root_ca_certificate: "@CA_PEM@",
+        listen_private_key: "@SERVER_KEY@",
+        listen_certificate: "@SERVER_CERT@",
+        enable_mtls: true,
+        connect_private_key: "@SERVER_KEY@",
+        connect_certificate: "@SERVER_CERT@",
+        verify_name_on_connect: true,
+        close_link_on_expiration: true,
+      },
+    },
+    shared_memory: { enabled: false },
+  },
+  access_control: {
+    enabled: false,
+  },
+  adminspace: {
+    enabled: true,
+    permissions: { read: true, write: false },
+  },
+}
