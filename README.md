@@ -1,11 +1,11 @@
 # TDK Server
 
-TDK Server is a high-performance, self-hosted relay server node for flexiv_tdk wide-area teleoperation.
+TDK Server is a high-performance, self-hosted relay server node for flexiv_tdk WAN teleoperation.
 It enables secure, low-latency, and reliable communication between user edge devices, and cloud infrastructure across different cities and continents. Users can independently deploy their own cross-region teleoperation applications based on the TDK server.
 
 ## Requirements
 
-- cloud VM (Ubuntu Server 22.04 LTS 64bit) with a **public IPv4 address**
+- Cloud VM (Ubuntu Server 22.04 LTS 64bit) with a **public IPv4 address**
 - Open **TCP/UDP 7449** on the cloud security group / firewall
 - SSH access to this VM (used both for administration and to **scp** client certificates)
 
