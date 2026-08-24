@@ -24,6 +24,9 @@ bash scripts/generate_server_client_cert.sh --ip SERVER_PUBLIC_IP
 
 # 3) Install TDK Server package + systemd service
 sudo bash scripts/install_tdk_server.sh
+
+# Or skip GitHub and install a .deb you already copied to this machine:
+# sudo bash scripts/install_tdk_server.sh /path/to/tdk-server_0.1.0_amd64.deb
 ```
 
 Re-create everything (new CA, all certs):

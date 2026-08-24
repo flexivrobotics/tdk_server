@@ -5,6 +5,8 @@
 #   - Run generate_server_client_cert.sh first
 #
 # Usage:
+#   sudo bash scripts/install_tdk_server.sh
+#   sudo bash scripts/install_tdk_server.sh /path/to/tdk-server_<ver>_<arch>.deb
 #   sudo bash scripts/install_tdk_server.sh [DEB_URL]
 
 set -euo pipefail
@@ -88,9 +90,38 @@ download_deb() {
     log_info "Download complete: ${dest}"
 }
 
-DEB_FILENAME="$(basename "${DEB_URL%%\?*}")"
-DEB_PACKAGE="${PACKAGES_DIR}/${DEB_FILENAME}"
-download_deb "${DEB_URL}" "${DEB_PACKAGE}"
+resolve_deb_path() {
+    local path="$1"
+    if [[ ! -f "${path}" ]]; then
+        log_err "Package not found: ${path}"
+        exit 1
+    fi
+    if [[ "${path}" != *.deb ]]; then
+        log_err "Expected a .deb file: ${path}"
+        exit 1
+    fi
+    if [[ ! -s "${path}" ]]; then
+        log_err "Package is empty: ${path}"
+        exit 1
+    fi
+    # Absolute path so later steps do not depend on cwd.
+    echo "$(cd "$(dirname "${path}")" && pwd)/$(basename "${path}")"
+}
+
+USER_ARG="${1:-}"
+if [[ -n "${USER_ARG}" && -f "${USER_ARG}" ]]; then
+    DEB_PACKAGE="$(resolve_deb_path "${USER_ARG}")"
+    log_info "Skipping GitHub download; using local package: ${DEB_PACKAGE}"
+else
+    if [[ -n "${USER_ARG}" && "${USER_ARG}" != http://* && "${USER_ARG}" != https://* ]]; then
+        log_err "Not a local .deb path or http(s) URL: ${USER_ARG}"
+        echo "Usage: sudo bash scripts/install_tdk_server.sh [/path/to/tdk-server.deb]" >&2
+        exit 1
+    fi
+    DEB_FILENAME="$(basename "${DEB_URL%%\?*}")"
+    DEB_PACKAGE="${PACKAGES_DIR}/${DEB_FILENAME}"
+    download_deb "${DEB_URL}" "${DEB_PACKAGE}"
+fi
 
 if [[ ! -f "${CONFIG_SRC}" ]]; then
     log_err "Missing ${CONFIG_SRC}. Run scripts/generate_server_client_cert.sh first."
